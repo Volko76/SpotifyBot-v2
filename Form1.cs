@@ -58,9 +58,10 @@ namespace SpotifyBot
             Process p = Process.Start(spotifyPath);
             IntPtr h = p.MainWindowHandle;
             Thread.Sleep(2000);
+            Thread.Sleep(10000);
             ActivateApp("Spotify");
             //p.WaitForInputIdle();
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
 
             SendKeys.SendWait("^(l)");
