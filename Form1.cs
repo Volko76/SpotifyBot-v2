@@ -71,8 +71,8 @@ namespace SpotifyBot
 
 
             SendKeys.SendWait("{ENTER}");
-            //SendKeys.SendWait("{TAB}");
-            resultSpotify();
+            SendKeys.SendWait("{TAB}");
+            //resultSpotify();
             /*
             var simu = new InputSimulator();
             simu.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LWIN, VirtualKeyCode.UP);

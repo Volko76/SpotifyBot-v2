@@ -1,5 +1,5 @@
 
-START - automation started - Tue Aug 02 2022 15:08:50 GMT+0200 (Paris, Madrid (heure d’été))
+START - automation started - Wed Aug 03 2022 12:25:47 GMT+0200 (Paris, Madrid (heure d’été))
 
 LIVE MODE - type done to quit
  [RPA][STARTED]
@@ -8,3 +8,5 @@ LIVE MODE - type done to quit
 [RPA][1] - listening for inputs
 [RPA][2] - dump exist_result to rpa_python.txt
 [RPA][2] - listening for inputs
+[RPA][3] - click playspotify.png
+[RPA][3] - listening for inputs
