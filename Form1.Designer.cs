@@ -40,6 +40,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnPlayQueue = new System.Windows.Forms.Button();
             this.btnRemoveFromQueue = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.RemoveAccount = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AddAccount = new System.Windows.Forms.Button();
+            this.lbComptes = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbInstanceOfSpotify = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnResearchSong
@@ -153,11 +163,111 @@
             this.btnRemoveFromQueue.UseVisualStyleBackColor = true;
             this.btnRemoveFromQueue.Click += new System.EventHandler(this.btnRemoveFromQueue_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(489, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Username";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tbUsername
+            // 
+            this.tbUsername.Location = new System.Drawing.Point(369, 58);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(294, 20);
+            this.tbUsername.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(489, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Password";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(369, 107);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(294, 20);
+            this.tbPassword.TabIndex = 14;
+            // 
+            // RemoveAccount
+            // 
+            this.RemoveAccount.Location = new System.Drawing.Point(372, 183);
+            this.RemoveAccount.Name = "RemoveAccount";
+            this.RemoveAccount.Size = new System.Drawing.Size(292, 24);
+            this.RemoveAccount.TabIndex = 19;
+            this.RemoveAccount.Text = "Supprimer de la liste";
+            this.RemoveAccount.UseVisualStyleBackColor = true;
+            this.RemoveAccount.Click += new System.EventHandler(this.RemoveAccount_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(442, 213);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(143, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Queue des comptes Spotify :";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // AddAccount
+            // 
+            this.AddAccount.Location = new System.Drawing.Point(371, 159);
+            this.AddAccount.Name = "AddAccount";
+            this.AddAccount.Size = new System.Drawing.Size(292, 24);
+            this.AddAccount.TabIndex = 17;
+            this.AddAccount.Text = "Ajouter à la liste de compte";
+            this.AddAccount.UseVisualStyleBackColor = true;
+            this.AddAccount.Click += new System.EventHandler(this.AddAccount_Click);
+            // 
+            // lbComptes
+            // 
+            this.lbComptes.FormattingEnabled = true;
+            this.lbComptes.Location = new System.Drawing.Point(368, 229);
+            this.lbComptes.Name = "lbComptes";
+            this.lbComptes.Size = new System.Drawing.Size(294, 147);
+            this.lbComptes.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(369, 384);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(143, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Queue des comptes Spotify :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbInstanceOfSpotify
+            // 
+            this.lbInstanceOfSpotify.FormattingEnabled = true;
+            this.lbInstanceOfSpotify.Location = new System.Drawing.Point(369, 405);
+            this.lbInstanceOfSpotify.Name = "lbInstanceOfSpotify";
+            this.lbInstanceOfSpotify.Size = new System.Drawing.Size(294, 147);
+            this.lbInstanceOfSpotify.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 564);
+            this.ClientSize = new System.Drawing.Size(709, 564);
+            this.Controls.Add(this.lbInstanceOfSpotify);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.RemoveAccount);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.AddAccount);
+            this.Controls.Add(this.lbComptes);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.btnRemoveFromQueue);
             this.Controls.Add(this.btnPlayQueue);
             this.Controls.Add(this.label2);
@@ -190,6 +300,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPlayQueue;
         private System.Windows.Forms.Button btnRemoveFromQueue;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Button RemoveAccount;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button AddAccount;
+        private System.Windows.Forms.ListBox lbComptes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox lbInstanceOfSpotify;
     }
 }
 

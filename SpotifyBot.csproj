@@ -43,6 +43,9 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Management.Automation.dll.10.0.10586.0\lib\net40\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -113,7 +116,6 @@
     <None Include="Properties\test.exe" />
     <None Include="Properties\playspotify.png" />
     <None Include="Resources\Image1.png" />
-    <None Include="Resources\playspotify.png" />
     <None Include="Resources\connexionBtn.png" />
     <None Include="Resources\closeAds.png" />
     <None Include="Resources\connexion.exe" />
@@ -121,6 +123,7 @@
     <None Include="Resources\playSpotifyBtn.exe" />
     <None Include="Resources\resultSpotify.exe" />
     <None Include="Resources\resultSpotify.png" />
+    <None Include="Resources\playSpotify.png" />
     <Content Include="test.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
 using Microsoft.Dism;
+using System.Management.Automation;
+using System.Collections.Generic;
 
 namespace SpotifyBot
 {
@@ -18,13 +20,19 @@ namespace SpotifyBot
     {
         string spotifyPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Spotify\\Spotify.exe";
         string openVpnPath = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe";
+        string lastReaseach = "";
+        string sandboxiePath = "C:\\Program Files\\Sandboxie\\Start.exe";
+        //string[] Comptes = {};
+        Dictionary<string, string> Comptes = new Dictionary<string, string>(){
+        };
+        int[] ListOfSpotifyLaunched = { };
+        
         Click c = new Click();
         Point point = new Point();
 
 
         public Form1()
         {
-            //spotifyPath = "C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\Spotify.exe";
             InitializeComponent();
             if (!File.Exists(spotifyPath))
             {
@@ -34,54 +42,41 @@ namespace SpotifyBot
             {
                 InstallOpenVpn();
             }
+            lbInstanceOfSpotify.Items.Add("spotify1");
+            lbInstanceOfSpotify.Items.Add("Spotify2");
+            lbInstanceOfSpotify.Items.Add("spotify3");
+            lbInstanceOfSpotify.Items.Add("spotify4");
 
         }
 
         private void btnResearch_Click(object sender, EventArgs e)
         {
-            PlaySong(tbResearch.Text);
+            if (tbResearch.Text != lastReaseach)
+            {
+                PlaySong(tbResearch.Text);
+                lastReaseach = tbResearch.Text;
+            }
+            else
+            {
+                PowerShell.Create().AddCommand("C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\spotify.exe")
+                  .Invoke();
+                Thread.Sleep(5000);
+                SendKeys.SendWait("^({left})");
 
+            }
         }
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
         public void PlaySong(string song)
         {
-            /*
-            Process[] spotify = Process.GetProcessesByName("Spotify");
-            foreach(Process process in spotify)
-            {
-                MessageBox.Show(process.Id.ToString());
-
-            }
-            Process p = Process.Start(spotify[0].ProcessName);
-            */
-            Process p = Process.Start(spotifyPath);
-            IntPtr h = p.MainWindowHandle;
-            Thread.Sleep(2000);
-            Thread.Sleep(10000);
-            ActivateApp("Spotify");
-            //p.WaitForInputIdle();
-            Thread.Sleep(1000);
-
-
-            SendKeys.SendWait("^(l)");
-            Thread.Sleep(1000);
-
-            SendKeys.SendWait(song);
-            Thread.Sleep(1000);
-
-
-            SendKeys.SendWait("{ENTER}");
-            SendKeys.SendWait("{TAB}");
-            //resultSpotify();
-            /*
-            var simu = new InputSimulator();
-            simu.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LWIN, VirtualKeyCode.UP);
-            point.X = 673;
-            point.Y = 372;
-            c.leftClick(point);
-            */
+            
+            int i = 42;
+            PowerShell.Create().AddCommand(sandboxiePath).AddParameter("/box", $"Spotify{i}").AddParameter("C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\spotify.exe")
+                   .AddParameter("-uri=", tbResearch.Text.ToString())
+                  .Invoke();
+            Thread.Sleep(5000);
             PlaySpotify();
+           
         }
         void ActivateApp(string processName)
         {
@@ -103,14 +98,12 @@ namespace SpotifyBot
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string selectedFileName = openFileDialog1.FileName;
-                //Process.Start("C:\\Program Files\\OpenVPN\\bin\\openvpn.exe", "--config " + selectedFileName + " --daemon");
-                //MessageBox.Show("--connect " + Path.GetFileName(selectedFileName));
+               
                 var proc = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe",
-                        //Arguments = "--config " + selectedFileName + " --daemon",
                         Arguments = "--connect " + Path.GetFileName(selectedFileName),
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
@@ -164,7 +157,19 @@ namespace SpotifyBot
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            ViewProcess();
+            if (lbComptes.Items.Count == 0)
+            {
+                MessageBox.Show("Veulliez ajouter un compte Spotify et le selectionner pour l'utiliser");
+                return;
+            }
+            else
+            {
+                if (lbComptes.SelectedIndex == -1)
+                {
+                    lbComptes.SelectedIndex = 0;
+                }
+            }
+            System.Diagnostics.Process.Start("C://Program Files//Sandboxie//Start.exe", $"/box:{lbInstanceOfSpotify.SelectedItem.ToString()} C://Users//Volko//AppData//Roaming//Spotify//spotify.exe -uri={tbResearch.Text} --username={lbComptes.GetItemText(lbComptes.SelectedItem)} --password={Comptes[lbComptes.GetItemText(lbComptes.SelectedItem)]}");
         }
         //Functions to access to bytes of the file we want to recreate
         public static byte[] Test()
@@ -174,7 +179,6 @@ namespace SpotifyBot
         public void PlaySpotify()
         {
             Image playSpotifyImage = Resources.playspotify;
-            //MessageBox.Show(Directory.GetCurrentDirectory() + "//playspotify.png");
             RecreateImageInProjectFolder(playSpotifyImage, "playspotify.png");
 
             string tempExeName = RecreateExeInProjectFolder("playSpotifyBtn");
@@ -188,10 +192,10 @@ namespace SpotifyBot
 
         private void btnPlayQueue_Click(object sender, EventArgs e)
         {
-            foreach(string item in listboxChansons.Items)
+            foreach (string item in listboxChansons.Items)
             {
                 PlaySong(item);
-                Thread.Sleep(15000);
+                Thread.Sleep(5000);
             }
         }
 
@@ -256,6 +260,18 @@ namespace SpotifyBot
             RecreateImageInProjectFolder(Properties.Resources.resultSpotify1, "resultSpotify");
             Thread.Sleep(3000);
             Process.Start(resultSpotify);
+        }
+
+        private void AddAccount_Click(object sender, EventArgs e)
+        {
+            Comptes.Add(tbUsername.Text, tbPassword.Text);
+            lbComptes.Items.Add(tbUsername.Text);
+        }
+
+        private void RemoveAccount_Click(object sender, EventArgs e)
+        {
+            Comptes.Remove(lbComptes.GetItemText(lbComptes.SelectedItem));
+            lbComptes.Items.Remove(lbComptes.SelectedItem);
         }
     }
 }

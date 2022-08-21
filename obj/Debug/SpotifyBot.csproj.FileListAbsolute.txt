@@ -23,3 +23,4 @@ C:\Users\Volko\Documents\GitHub\CreoAutoInstal\SpotifyBot\SpotifyBot\obj\Debug\S
 C:\Users\Volko\Documents\GitHub\CreoAutoInstal\SpotifyBot\SpotifyBot\bin\Debug\Microsoft.Dism.dll
 C:\Users\Volko\Documents\GitHub\CreoAutoInstal\SpotifyBot\SpotifyBot\bin\Debug\Microsoft.Dism.pdb
 C:\Users\Volko\Documents\GitHub\CreoAutoInstal\SpotifyBot\SpotifyBot\bin\Debug\Microsoft.Dism.xml
+C:\Users\Volko\Documents\GitHub\CreoAutoInstal\SpotifyBot\SpotifyBot\bin\Debug\System.Management.Automation.dll
