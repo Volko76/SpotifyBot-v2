@@ -257,7 +257,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 564);
+            this.ClientSize = new System.Drawing.Size(709, 580);
             this.Controls.Add(this.lbInstanceOfSpotify);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.RemoveAccount);
@@ -280,7 +280,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnResearchSong);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SpotifyBot";
             this.ResumeLayout(false);
             this.PerformLayout();
 
