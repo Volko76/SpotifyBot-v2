@@ -89,7 +89,8 @@ namespace SpotifyBot
         }
         private void btnResearch_Click(object sender, EventArgs e)
         {
-            if (tbResearch.Text != lastReaseach)
+            PlaySong(tbResearch.Text);
+            /*if (tbResearch.Text != lastReaseach)
             {
                 PlaySong(tbResearch.Text);
                 lastReaseach = tbResearch.Text;
@@ -101,7 +102,7 @@ namespace SpotifyBot
                 Thread.Sleep(5000);
                 SendKeys.SendWait("^({left})");
 
-            }
+            }*/
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -311,7 +312,7 @@ namespace SpotifyBot
         {
 
         }
-
+        #region MenuLeft
         private void btnMusic_Click(object sender, EventArgs e)
         {
             PnlNav.Height = btnMusic.Height;
@@ -373,7 +374,7 @@ namespace SpotifyBot
         {
             btnSettings.BackColor = Color.FromArgb(24, 30, 54);
         }
-
+        #endregion MenuLeft
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();
