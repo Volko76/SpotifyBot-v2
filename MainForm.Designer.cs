@@ -71,6 +71,9 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
+            this.tbIntervalMusic = new System.Windows.Forms.TrackBar();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbIntervalMusic = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,6 +81,7 @@
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbIntervalMusic)).BeginInit();
             this.SuspendLayout();
             // 
             // btnResearchSong
@@ -145,7 +149,7 @@
             this.TestBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TestBtn.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TestBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.TestBtn.Location = new System.Drawing.Point(242, 560);
+            this.TestBtn.Location = new System.Drawing.Point(689, 553);
             this.TestBtn.Name = "TestBtn";
             this.TestBtn.Size = new System.Drawing.Size(294, 46);
             this.TestBtn.TabIndex = 5;
@@ -640,6 +644,37 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // tbIntervalMusic
+            // 
+            this.tbIntervalMusic.Location = new System.Drawing.Point(242, 565);
+            this.tbIntervalMusic.Maximum = 15000;
+            this.tbIntervalMusic.Name = "tbIntervalMusic";
+            this.tbIntervalMusic.Size = new System.Drawing.Size(295, 45);
+            this.tbIntervalMusic.TabIndex = 33;
+            this.tbIntervalMusic.Scroll += new System.EventHandler(this.tbIntervalMusic_Scroll);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.label11.Location = new System.Drawing.Point(306, 557);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(174, 13);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Temps entre chaque chanson (min)";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbIntervalMusic
+            // 
+            this.lbIntervalMusic.AutoSize = true;
+            this.lbIntervalMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.lbIntervalMusic.Location = new System.Drawing.Point(533, 570);
+            this.lbIntervalMusic.Name = "lbIntervalMusic";
+            this.lbIntervalMusic.Size = new System.Drawing.Size(13, 13);
+            this.lbIntervalMusic.TabIndex = 35;
+            this.lbIntervalMusic.Text = "0";
+            this.lbIntervalMusic.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // SpotifyBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -647,6 +682,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1372, 622);
             this.ControlBox = false;
+            this.Controls.Add(this.lbIntervalMusic);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.tbIntervalMusic);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -682,6 +720,7 @@
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbIntervalMusic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,6 +771,9 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TrackBar tbIntervalMusic;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbIntervalMusic;
     }
 }
 

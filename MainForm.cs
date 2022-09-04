@@ -16,6 +16,7 @@ namespace SpotifyBot
 
     public partial class SpotifyBot : Form
     {
+        #region CollapseAll
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -30,6 +31,7 @@ namespace SpotifyBot
         string sandboxieSbiePath = "C:\\Program Files\\Sandboxie-Plus\\SbieIni.exe";
         string lastReaseach = "";
         public int sandboxNumber = 0;
+        public int timeBetweenMusic = 5;
         static public int Tier = 0; // 0 = basic (5 sandbox), 1 = premier tier (10 sandbox), 2 = deuxieme tier (30 sandbox), 3 = illimité
         //string[] Comptes = {};
         Dictionary<string, string> Comptes = new Dictionary<string, string>()
@@ -97,6 +99,8 @@ namespace SpotifyBot
         private void btnResearch_Click(object sender, EventArgs e)
         {
             PlaySong(tbResearch.Text);
+            Thread.Sleep(2000);
+            SendKeys.SendWait("^(r)");
             /*if (tbResearch.Text != lastReaseach)
             {
                 PlaySong(tbResearch.Text);
@@ -229,7 +233,7 @@ namespace SpotifyBot
             foreach (string item in listboxChansons.Items)
             {
                 PlaySong(item);
-                Thread.Sleep(5000);
+                Thread.Sleep(timeBetweenMusic);
             }
         }
 
@@ -395,5 +399,12 @@ namespace SpotifyBot
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
+        private void tbIntervalMusic_Scroll(object sender, EventArgs e)
+        {
+            timeBetweenMusic = tbIntervalMusic.Value * 1000;
+            lbIntervalMusic.Text = (tbIntervalMusic.Value / 60).ToString();
+        }
     }
+    #endregion CollapseAll
 }
