@@ -16,6 +16,13 @@ namespace SpotifyBot
 
     public partial class SpotifyBot : Form
     {
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
         public Form MainForm;
         string spotifyPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Spotify\\Spotify.exe";
         string openVpnPath = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe";
@@ -378,6 +385,15 @@ namespace SpotifyBot
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void SpotifyBot_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }
