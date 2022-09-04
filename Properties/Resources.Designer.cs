@@ -63,9 +63,39 @@ namespace SpotifyBot.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap close__1_ {
+            get {
+                object obj = ResourceManager.GetObject("close (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap close__2_ {
+            get {
+                object obj = ResourceManager.GetObject("close (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap closeAds {
             get {
                 object obj = ResourceManager.GetObject("closeAds", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap closeTranspa {
+            get {
+                object obj = ResourceManager.GetObject("closeTranspa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +116,106 @@ namespace SpotifyBot.Properties {
         internal static System.Drawing.Bitmap connexionBtn {
             get {
                 object obj = ResourceManager.GetObject("connexionBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap instance__1_ {
+            get {
+                object obj = ResourceManager.GetObject("instance (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_openvpn {
+            get {
+                object obj = ResourceManager.GetObject("logo_openvpn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_openvpn__1___1_ {
+            get {
+                object obj = ResourceManager.GetObject("logo_openvpn (1) (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_openvpn1 {
+            get {
+                object obj = ResourceManager.GetObject("logo_openvpn1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique {
+            get {
+                object obj = ResourceManager.GetObject("musique", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique__1_ {
+            get {
+                object obj = ResourceManager.GetObject("musique (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("musique (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique__2_ {
+            get {
+                object obj = ResourceManager.GetObject("musique (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique__3_ {
+            get {
+                object obj = ResourceManager.GetObject("musique (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap musique1 {
+            get {
+                object obj = ResourceManager.GetObject("musique1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,6 +256,46 @@ namespace SpotifyBot.Properties {
         internal static System.Drawing.Bitmap resultSpotify1 {
             get {
                 object obj = ResourceManager.GetObject("resultSpotify1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spotifypng__1_ {
+            get {
+                object obj = ResourceManager.GetObject("spotifypng (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spotifypng__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("spotifypng (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xe1lFonV6xk7ZPlBawsYZIZ06_xERTi12y9b4sHMZA3WJYdOsuiFYgbHQEZfu2LwXEI {
+            get {
+                object obj = ResourceManager.GetObject("xe1lFonV6xk7ZPlBawsYZIZ06-xERTi12y9b4sHMZA3WJYdOsuiFYgbHQEZfu2LwXEI", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
