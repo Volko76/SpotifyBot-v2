@@ -1,15 +1,13 @@
-﻿using Microsoft.Dism;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace SpotifyBot
 {
@@ -17,31 +15,31 @@ namespace SpotifyBot
     public partial class SpotifyBot : Form
     {
         #region CollapseAll
+        #region variables
+        #region menu
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
-
+        
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
+        #endregion menu
         public static extern bool ReleaseCapture();
         public Form MainForm;
         string spotifyPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Spotify\\Spotify.exe";
         string openVpnPath = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe";
         string sandboxiePath = "C:\\Program Files\\Sandboxie-Plus\\Start.exe";
         string sandboxieSbiePath = "C:\\Program Files\\Sandboxie-Plus\\SbieIni.exe";
-        string lastReaseach = "";
         public int sandboxNumber = 0;
         public int timeBetweenMusic = 5;
+        public bool doStop = false;
         static public int Tier = 0; // 0 = basic (5 sandbox), 1 = premier tier (10 sandbox), 2 = deuxieme tier (30 sandbox), 3 = illimité
         //string[] Comptes = {};
         Dictionary<string, string> Comptes = new Dictionary<string, string>()
         {
         };
-        int[] ListOfSpotifyLaunched = { };
 
-        Click c = new Click();
-        Point point = new Point();
-
+        #region arrondis
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
                 int nLeftRect,
@@ -51,18 +49,22 @@ namespace SpotifyBot
                 int nWidthEllipse,
                 int nHeightEllipse
             );
-        
-
+        #endregion arrondis
+        #endregion variables
 
         public SpotifyBot()
         {
             InitializeComponent();
+            #region arrondis
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             PnlNav.Height = btnMusic.Height;
             PnlNav.Top = btnMusic.Top;
             PnlNav.Left = btnMusic.Left;
             btnMusic.BackColor = Color.FromArgb(46, 51, 73);
+            #endregion arrondis
             MainForm = this;
+            timeBetweenMusic = tbIntervalMusic.Value;
+            lbIntervalMusic.Text = (timeBetweenMusic / 1000 / 60).ToString();
             if (!File.Exists(spotifyPath))
             {
                 InstallSpotify();
@@ -86,40 +88,7 @@ namespace SpotifyBot
                 }
             }
         }
-        [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-        void ActivateApp(string processName)
-        {
-            Process[] p = Process.GetProcessesByName(processName);
 
-            // Activate the first application we find with this name
-            if (p.Count() > 0)
-                SetForegroundWindow(p[0].MainWindowHandle);
-        }
-        private void btnResearch_Click(object sender, EventArgs e)
-        {
-            PlaySong(tbResearch.Text);
-            Thread.Sleep(2000);
-            SendKeys.SendWait("^(r)");
-            /*if (tbResearch.Text != lastReaseach)
-            {
-                PlaySong(tbResearch.Text);
-                lastReaseach = tbResearch.Text;
-            }
-            else
-            {
-                PowerShell.Create().AddCommand(spotifyPath)
-                  .Invoke();
-                Thread.Sleep(5000);
-                SendKeys.SendWait("^({left})");
-
-            }*/
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         public void PlaySong(string song)
         {
             if (lbComptes.Items.Count == 0)
@@ -135,144 +104,14 @@ namespace SpotifyBot
                     return;
                 }
             }
-            System.Diagnostics.Process.Start(sandboxiePath, $"/box:{lbInstanceOfSpotify.SelectedItem.ToString()} {spotifyPath} -uri={tbResearch.Text} --username={lbComptes.GetItemText(lbComptes.SelectedItem)} --password={Comptes[lbComptes.GetItemText(lbComptes.SelectedItem)]}");
-            /*
-            int i = 42;
-            PowerShell.Create().AddCommand(sandboxiePath).AddParameter("/box", $"Spotify{i}").AddParameter("C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\spotify.exe")
-                   .AddParameter("-uri=", tbResearch.Text.ToString())
-                  .Invoke();
-            Thread.Sleep(5000);
-            PlaySpotify();*/
-
+            System.Diagnostics.Process.Start(sandboxiePath, $"/box:{lbInstanceOfSpotify.SelectedItem.ToString()} {spotifyPath} --uri={tbResearch.Text} --username={lbComptes.GetItemText(lbComptes.SelectedItem)} --password={Comptes[lbComptes.GetItemText(lbComptes.SelectedItem)]}");
+            //C:\\Program Files\\Sandboxie-Plus\\Start.exe /box:spotify1 C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\Spotify.exe -uri=Mika -username=volkovolko76@gmail.com -password=S.Bou7Chou
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = "C:\\Program Files\\OpenVPN\\config";
-            openFileDialog1.Filter = "Fichier ovpn | *.ovpn";
-            openFileDialog1.FilterIndex = 0;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFileName = openFileDialog1.FileName;
-
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe",
-                        Arguments = "--connect " + Path.GetFileName(selectedFileName),
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = false,
-                        WorkingDirectory = Path.GetDirectoryName(selectedFileName)
-                    }
-                };
-                proc.Start();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Process.Start(spotifyPath);
-        }
-
-
-
-        void InstallSpotify()
-        {
-            MessageBox.Show("Nous allons installer Spotify dans le bon répertoire pour le bon fonctionnement du programme...");
-            using (var client = new System.Net.WebClient())
-            {
-                client.DownloadFile("https://download.scdn.co/SpotifySetup.exe", "spotifyInstaller.exe");
-            }
-            Process.Start("spotifyInstaller.exe");
-        }
-
-        void InstallOpenVpn()
-        {
-            MessageBox.Show("Nous allons installer OpenVPN dans le bon répertoire pour le bon fonctionnement du programme...");
-            using (var client = new System.Net.WebClient())
-            {
-                client.DownloadFile("https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.7-I602-amd64.msi", "openvpnInstaller.msi");
-            }
-            Process.Start("openvpnInstaller.msi");
-            Thread.Sleep(1000);
-            SendKeys.SendWait("{ENTER}");
-            Thread.Sleep(30000);
-            ActivateApp("OpenVPN 2.5.7-I602");
-            SendKeys.SendWait("{ENTER}");
-
-            //Setup OpenVPN 2.5.7-I602
-        }
-        void InstallSandboxie()
-        {
-            MessageBox.Show("Nous allons installer Sandboxie dans le bon répertoire pour le bon fonctionnement du programme...");
-            using (var client = new System.Net.WebClient())
-            {
-                client.DownloadFile("https://github.com/sandboxie-plus/Sandboxie/releases/download/v1.3.2/Sandboxie-Plus-x64-v1.3.2.exe", "sandboxieInstaller.exe");
-            }
-            Process.Start("sandboxieInstaller.exe", "/S");
-        }
-
-        private void TestBtn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Tier.ToString());
-        }
-
-        private void btnAddToQueue_Click(object sender, EventArgs e)
-        {
-            listboxChansons.Items.Add(tbResearch.Text.ToString());
-        }
-
-        private void btnPlayQueue_Click(object sender, EventArgs e)
-        {
-            foreach (string item in listboxChansons.Items)
-            {
-                PlaySong(item);
-                Thread.Sleep(timeBetweenMusic);
-            }
-        }
-
-        private void btnRemoveFromQueue_Click(object sender, EventArgs e)
-        {
-            foreach (string s in listboxChansons.SelectedItems.OfType<string>().ToList())
-                listboxChansons.Items.Remove(s);
-        }
-
-        public void ViewProcess()
-        {
-            Process currentProcess = Process.GetCurrentProcess();
-            Process[] list = Process.GetProcessesByName("Spotify");
-            foreach (var process in list)
-            {
-                MessageBox.Show(process.ProcessName + process.Id.ToString());
-            }
-        }
-
-        public void RecreateImageInProjectFolder(Image img, string name)
-        {
-            img.Save(Directory.GetCurrentDirectory() + $"//{name}.png");
-        }
-
-        private void AddAccount_Click(object sender, EventArgs e)
-        {
-            Comptes.Add(tbUsername.Text, tbPassword.Text);
-            lbComptes.Items.Add(tbUsername.Text);
-        }
-
-        private void RemoveAccount_Click(object sender, EventArgs e)
-        {
-            Comptes.Remove(lbComptes.GetItemText(lbComptes.SelectedItem));
-            lbComptes.Items.Remove(lbComptes.SelectedItem);
-        }
-
+        #region intances
         private void UpgradeBtn_Click(object sender, EventArgs e)
         {
-            EnterLicenceKey enterLicenceKey = new EnterLicenceKey(this);
+            EnterLicenceKey enterLicenceKey = new EnterLicenceKey(this, userLabel, tierLabel);
             enterLicenceKey.Show();
         }
         void AddInstance(int i)
@@ -318,13 +157,164 @@ namespace SpotifyBot
             Process.Start(sandboxieSbiePath, $"set {lbInstanceOfSpotify.SelectedItem} Enabled n");
             lbInstanceOfSpotify.Items.Remove(lbInstanceOfSpotify.SelectedItem);
         }
+        #endregion intances
+
+        #region accounts
+        private void AddAccount_Click(object sender, EventArgs e)
+        {
+            Comptes.Add(tbUsername.Text, tbPassword.Text);
+            lbComptes.Items.Add(tbUsername.Text);
+            string savedUsernames = "";
+            foreach (string i in Comptes.Keys)
+            {
+                savedUsernames += i + " ";
+            }
+            Properties.Settings.Default.Usernames = savedUsernames;
+            string savedPasswords = "";
+            foreach (string i in Comptes.Keys)
+            {
+                savedPasswords += i + " ";
+            }
+            Properties.Settings.Default.Passwords = savedPasswords;
+        }
+
+        private void RemoveAccount_Click(object sender, EventArgs e)
+        {
+            Comptes.Remove(lbComptes.GetItemText(lbComptes.SelectedItem));
+            lbComptes.Items.Remove(lbComptes.SelectedItem);
+        }
+        #endregion accounts
+
+        #region loopMusic
+        private void btnResearch_Click(object sender, EventArgs e)
+        {
+            //while (doStop == false)
+            //{
+                PlaySong(tbResearch.Text);
+              //  Thread.Sleep(timeBetweenMusic);
+            //}
+            //doStop = false;
+        }
+
+        #endregion loopMusic
+
+        #region Queue
+        private void btnAddToQueue_Click(object sender, EventArgs e)
+        {
+            listboxChansons.Items.Add(tbResearch.Text.ToString());
+        }
+
+        private void btnPlayQueue_Click(object sender, EventArgs e)
+        {
+            foreach (string item in listboxChansons.Items)
+            {
+                PlaySong(item);
+                Thread.Sleep(timeBetweenMusic);
+            }
+        }
+
+        private void btnRemoveFromQueue_Click(object sender, EventArgs e)
+        {
+            foreach (string s in listboxChansons.SelectedItems.OfType<string>().ToList())
+                listboxChansons.Items.Remove(s);
+        }
+        #endregion Queue
 
         private void SpotifyBot_Load(object sender, EventArgs e)
         {
-
+            string currentUsernames = Properties.Settings.Default.Usernames;
+            string currentPasswords = Properties.Settings.Default.Passwords;
+            Comptes = new Dictionary<string, string>();
+            List<string> currentUsernamesList = currentUsernames.Split(' ').ToList();
+            List<string> currentPasswordsList = currentPasswords.Split(' ').ToList();
+            for (int i = 0; i < currentUsernamesList.Count; i++)
+            {
+                Comptes.Add(currentUsernamesList[i], currentPasswordsList[i]);
+                lbComptes.Items.Add(currentUsernamesList[i]);
+            }
         }
+
+        private void TestBtn_Click(object sender, EventArgs e)
+        {
+            SearchURL searchURL = new SearchURL("mika");
+            searchURL.Test("mika");
+        }
+
+        private void btnConnectOpenVPN_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "C:\\Program Files\\OpenVPN\\config";
+            openFileDialog1.Filter = "Fichier ovpn | *.ovpn";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFileName = openFileDialog1.FileName;
+
+                var proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe",
+                        Arguments = "--connect " + Path.GetFileName(selectedFileName),
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = false,
+                        WorkingDirectory = Path.GetDirectoryName(selectedFileName)
+                    }
+                };
+                proc.Start();
+            }
+        }
+
+        private void btnLaunchSpotify_Click(object sender, EventArgs e)
+        {
+            Process.Start(spotifyPath);
+        }
+
+        #region installations
+        void InstallSpotify()
+        {
+            MessageBox.Show("Nous allons installer Spotify dans le bon répertoire pour le bon fonctionnement du programme...");
+            using (var client = new System.Net.WebClient())
+            {
+                client.DownloadFile("https://download.scdn.co/SpotifySetup.exe", "spotifyInstaller.exe");
+            }
+            Process.Start("spotifyInstaller.exe");
+        }
+
+        void InstallOpenVpn()
+        {
+            MessageBox.Show("Nous allons installer OpenVPN dans le bon répertoire pour le bon fonctionnement du programme...");
+            using (var client = new System.Net.WebClient())
+            {
+                client.DownloadFile("https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.7-I602-amd64.msi", "openvpnInstaller.msi");
+            }
+            Process.Start("openvpnInstaller.msi");
+            Thread.Sleep(1000);
+            SendKeys.SendWait("{ENTER}");
+            Thread.Sleep(30000);
+            ActivateApp("OpenVPN 2.5.7-I602");
+            SendKeys.SendWait("{ENTER}");
+
+            //Setup OpenVPN 2.5.7-I602
+        }
+        void InstallSandboxie()
+        {
+            MessageBox.Show("Nous allons installer Sandboxie dans le bon répertoire pour le bon fonctionnement du programme...");
+            using (var client = new System.Net.WebClient())
+            {
+                client.DownloadFile("https://github.com/sandboxie-plus/Sandboxie/releases/download/v1.3.2/Sandboxie-Plus-x64-v1.3.2.exe", "sandboxieInstaller.exe");
+            }
+            Process.Start("sandboxieInstaller.exe", "/S");
+        }
+        #endregion installations
+        
         #region MenuLeft
-        private void btnMusic_Click(object sender, EventArgs e)
+        
+        private void btnMusic_Enter(object sender, EventArgs e)
         {
             PnlNav.Height = btnMusic.Height;
             PnlNav.Top = btnMusic.Top;
@@ -333,28 +323,28 @@ namespace SpotifyBot
 
         }
 
-        private void btnComptesSpotifyHome_Click(object sender, EventArgs e)
+        private void btnComptesSpotifyHome_Enter(object sender, EventArgs e)
         {
             PnlNav.Height = btnComptesSpotifyHome.Height;
             PnlNav.Top = btnComptesSpotifyHome.Top;
             btnComptesSpotifyHome.BackColor = Color.FromArgb(46, 51, 73);
         }
 
-        private void btnInstanceHome_Click(object sender, EventArgs e)
+        private void btnInstanceHome_Enter(object sender, EventArgs e)
         {
             PnlNav.Height = btnInstanceHome.Height;
             PnlNav.Top = btnInstanceHome.Top;
             btnInstanceHome.BackColor = Color.FromArgb(46, 51, 73);
         }
 
-        private void BtnOpenVPNHome_Click(object sender, EventArgs e)
+        private void BtnOpenVPNHome_Enter(object sender, EventArgs e)
         {
             PnlNav.Height = BtnOpenVPNHome.Height;
             PnlNav.Top = BtnOpenVPNHome.Top;
             BtnOpenVPNHome.BackColor = Color.FromArgb(46, 51, 73);
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void btnSettings_Enter(object sender, EventArgs e)
         {
             PnlNav.Height = btnSettings.Height;
             PnlNav.Top = btnSettings.Top;
@@ -386,7 +376,7 @@ namespace SpotifyBot
             btnSettings.BackColor = Color.FromArgb(24, 30, 54);
         }
         #endregion MenuLeft
-        private void button3_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -402,9 +392,53 @@ namespace SpotifyBot
 
         private void tbIntervalMusic_Scroll(object sender, EventArgs e)
         {
-            timeBetweenMusic = tbIntervalMusic.Value * 1000;
-            lbIntervalMusic.Text = (tbIntervalMusic.Value / 60).ToString();
+            timeBetweenMusic = tbIntervalMusic.Value;
+            lbIntervalMusic.Text = (tbIntervalMusic.Value / 60 / 1000).ToString();
         }
+
+        
+        private void panel6_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void btnStopRepeat_Click(object sender, EventArgs e)
+        {
+            doStop = true;
+        }
+        #region activateApp
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        void ActivateApp(string processName)
+        {
+            Process[] p = Process.GetProcessesByName(processName);
+            // Activate the first application we find with this name
+            if (p.Count() > 0)
+                SetForegroundWindow(p[0].MainWindowHandle);
+        }
+        #endregion activateApp
+
+        #region tools
+        public void ViewProcess()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            Process[] list = Process.GetProcessesByName("Spotify");
+            foreach (var process in list)
+            {
+                MessageBox.Show(process.ProcessName + process.Id.ToString());
+            }
+        }
+
+        /*
+        public void RecreateImageInProjectFolder(Image img, string name)
+        {
+            img.Save(Directory.GetCurrentDirectory() + $"//{name}.png");
+        }*/
+        #endregion tools
     }
     #endregion CollapseAll
 }
