@@ -55,12 +55,6 @@
             this.btnAddInstance = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PnlNav = new System.Windows.Forms.Panel();
-            this.BtnOpenVPNHome = new System.Windows.Forms.Button();
-            this.btnInstanceHome = new System.Windows.Forms.Button();
-            this.btnComptesSpotifyHome = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.btnMusic = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tierLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
@@ -272,6 +266,7 @@
             this.tbPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.tbPassword.Location = new System.Drawing.Point(15, 77);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(294, 22);
             this.tbPassword.TabIndex = 14;
             // 
@@ -411,119 +406,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.panel1.Controls.Add(this.PnlNav);
-            this.panel1.Controls.Add(this.BtnOpenVPNHome);
-            this.panel1.Controls.Add(this.btnInstanceHome);
-            this.panel1.Controls.Add(this.btnComptesSpotifyHome);
-            this.panel1.Controls.Add(this.btnSettings);
-            this.panel1.Controls.Add(this.btnMusic);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(186, 622);
             this.panel1.TabIndex = 27;
-            // 
-            // PnlNav
-            // 
-            this.PnlNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.PnlNav.Location = new System.Drawing.Point(0, 193);
-            this.PnlNav.Name = "PnlNav";
-            this.PnlNav.Size = new System.Drawing.Size(3, 100);
-            this.PnlNav.TabIndex = 28;
-            // 
-            // BtnOpenVPNHome
-            // 
-            this.BtnOpenVPNHome.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.BtnOpenVPNHome.FlatAppearance.BorderSize = 0;
-            this.BtnOpenVPNHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenVPNHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOpenVPNHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.BtnOpenVPNHome.Image = global::SpotifyBot.Properties.Resources.logo_openvpn__1___1_;
-            this.BtnOpenVPNHome.Location = new System.Drawing.Point(0, 276);
-            this.BtnOpenVPNHome.Name = "BtnOpenVPNHome";
-            this.BtnOpenVPNHome.Size = new System.Drawing.Size(186, 42);
-            this.BtnOpenVPNHome.TabIndex = 5;
-            this.BtnOpenVPNHome.Text = "OpenVPN";
-            this.BtnOpenVPNHome.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.BtnOpenVPNHome.UseVisualStyleBackColor = true;
-            this.BtnOpenVPNHome.Enter += new System.EventHandler(this.BtnOpenVPNHome_Enter);
-            this.BtnOpenVPNHome.Leave += new System.EventHandler(this.BtnOpenVPNHome_Leave);
-            // 
-            // btnInstanceHome
-            // 
-            this.btnInstanceHome.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.btnInstanceHome.FlatAppearance.BorderSize = 0;
-            this.btnInstanceHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInstanceHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInstanceHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnInstanceHome.Image = global::SpotifyBot.Properties.Resources.instance__1_;
-            this.btnInstanceHome.Location = new System.Drawing.Point(0, 236);
-            this.btnInstanceHome.Name = "btnInstanceHome";
-            this.btnInstanceHome.Size = new System.Drawing.Size(186, 42);
-            this.btnInstanceHome.TabIndex = 4;
-            this.btnInstanceHome.Text = "Instances";
-            this.btnInstanceHome.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnInstanceHome.UseVisualStyleBackColor = true;
-            this.btnInstanceHome.Enter += new System.EventHandler(this.btnInstanceHome_Enter);
-            this.btnInstanceHome.Leave += new System.EventHandler(this.btnInstanceHome_Leave);
-            // 
-            // btnComptesSpotifyHome
-            // 
-            this.btnComptesSpotifyHome.CausesValidation = false;
-            this.btnComptesSpotifyHome.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.btnComptesSpotifyHome.FlatAppearance.BorderSize = 0;
-            this.btnComptesSpotifyHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnComptesSpotifyHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComptesSpotifyHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnComptesSpotifyHome.Image = global::SpotifyBot.Properties.Resources.spotifypng__1_1;
-            this.btnComptesSpotifyHome.Location = new System.Drawing.Point(0, 190);
-            this.btnComptesSpotifyHome.Name = "btnComptesSpotifyHome";
-            this.btnComptesSpotifyHome.Size = new System.Drawing.Size(186, 42);
-            this.btnComptesSpotifyHome.TabIndex = 3;
-            this.btnComptesSpotifyHome.Text = "Comptes";
-            this.btnComptesSpotifyHome.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnComptesSpotifyHome.UseVisualStyleBackColor = true;
-            this.btnComptesSpotifyHome.Enter += new System.EventHandler(this.btnComptesSpotifyHome_Enter);
-            this.btnComptesSpotifyHome.Leave += new System.EventHandler(this.btnComptesSpotifyHome_Leave);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSettings.FlatAppearance.BorderSize = 0;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSettings.Image = global::SpotifyBot.Properties.Resources.musique__1_1;
-            this.btnSettings.Location = new System.Drawing.Point(0, 580);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(186, 42);
-            this.btnSettings.TabIndex = 2;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Enter += new System.EventHandler(this.btnSettings_Enter);
-            this.btnSettings.Leave += new System.EventHandler(this.btnSettings_Leave);
-            // 
-            // btnMusic
-            // 
-            this.btnMusic.CausesValidation = false;
-            this.btnMusic.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.btnMusic.FlatAppearance.BorderSize = 0;
-            this.btnMusic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMusic.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnMusic.Image = global::SpotifyBot.Properties.Resources.musique__1_1;
-            this.btnMusic.Location = new System.Drawing.Point(0, 144);
-            this.btnMusic.Name = "btnMusic";
-            this.btnMusic.Size = new System.Drawing.Size(186, 42);
-            this.btnMusic.TabIndex = 1;
-            this.btnMusic.Text = "Music";
-            this.btnMusic.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnMusic.UseVisualStyleBackColor = true;
-            this.btnMusic.Enter += new System.EventHandler(this.btnMusic_Enter);
-            this.btnMusic.Leave += new System.EventHandler(this.btnMusic_Leave);
             // 
             // panel2
             // 
@@ -628,6 +516,7 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1196, 51);
             this.panel6.TabIndex = 32;
+            this.panel6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpotifyBot_MouseDown);
             // 
             // btnExit
             // 
@@ -651,11 +540,11 @@
             // 
             this.tbIntervalMusic.Location = new System.Drawing.Point(242, 565);
             this.tbIntervalMusic.Maximum = 700000;
-            this.tbIntervalMusic.Minimum = 20000;
+            this.tbIntervalMusic.Minimum = 60000;
             this.tbIntervalMusic.Name = "tbIntervalMusic";
             this.tbIntervalMusic.Size = new System.Drawing.Size(295, 45);
             this.tbIntervalMusic.TabIndex = 33;
-            this.tbIntervalMusic.Value = 20000;
+            this.tbIntervalMusic.Value = 60000;
             this.tbIntervalMusic.Scroll += new System.EventHandler(this.tbIntervalMusic_Scroll);
             // 
             // label11
@@ -783,14 +672,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnMusic;
         private System.Windows.Forms.Label tierLabel;
         private System.Windows.Forms.Label userLabel;
-        private System.Windows.Forms.Button btnComptesSpotifyHome;
-        private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Button btnInstanceHome;
-        private System.Windows.Forms.Button BtnOpenVPNHome;
-        private System.Windows.Forms.Panel PnlNav;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;

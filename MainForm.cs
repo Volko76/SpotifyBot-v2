@@ -35,9 +35,7 @@ namespace SpotifyBot
         public bool doStop = false;
         static public int Tier = 0; // 0 = basic (5 sandbox), 1 = premier tier (10 sandbox), 2 = deuxieme tier (30 sandbox), 3 = illimité
         //string[] Comptes = {};
-        Dictionary<string, string> Comptes = new Dictionary<string, string>()
-        {
-        };
+        List<Comptes> listComptes = new List<Comptes>();
 
         #region arrondis
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -51,20 +49,17 @@ namespace SpotifyBot
             );
         #endregion arrondis
         #endregion variables
-
+        
         public SpotifyBot()
         {
             InitializeComponent();
             #region arrondis
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-            PnlNav.Height = btnMusic.Height;
-            PnlNav.Top = btnMusic.Top;
-            PnlNav.Left = btnMusic.Left;
-            btnMusic.BackColor = Color.FromArgb(46, 51, 73);
             #endregion arrondis
             MainForm = this;
             timeBetweenMusic = tbIntervalMusic.Value;
             lbIntervalMusic.Text = (timeBetweenMusic / 1000 / 60).ToString();
+            lbComptes.Text = Properties.Settings.Default.Comptes;
             if (!File.Exists(spotifyPath))
             {
                 InstallSpotify();
@@ -104,7 +99,7 @@ namespace SpotifyBot
                     return;
                 }
             }
-            System.Diagnostics.Process.Start(sandboxiePath, $"/box:{lbInstanceOfSpotify.SelectedItem.ToString()} {spotifyPath} --uri={tbResearch.Text} --username={lbComptes.GetItemText(lbComptes.SelectedItem)} --password={Comptes[lbComptes.GetItemText(lbComptes.SelectedItem)]}");
+            //System.Diagnostics.Process.Start(sandboxiePath, $"/box:{lbInstanceOfSpotify.SelectedItem.ToString()} {spotifyPath} --uri={tbResearch.Text} --username={lbComptes.GetItemText(lbComptes.SelectedItem)} --password={Comptes[lbComptes.GetItemText(lbComptes.SelectedItem)]}");
             //C:\\Program Files\\Sandboxie-Plus\\Start.exe /box:spotify1 C:\\Users\\Volko\\AppData\\Roaming\\Spotify\\Spotify.exe -uri=Mika -username=volkovolko76@gmail.com -password=S.Bou7Chou
         }
 
@@ -162,25 +157,20 @@ namespace SpotifyBot
         #region accounts
         private void AddAccount_Click(object sender, EventArgs e)
         {
-            Comptes.Add(tbUsername.Text, tbPassword.Text);
-            lbComptes.Items.Add(tbUsername.Text);
-            string savedUsernames = "";
-            foreach (string i in Comptes.Keys)
-            {
-                savedUsernames += i + " ";
-            }
-            Properties.Settings.Default.Usernames = savedUsernames;
-            string savedPasswords = "";
-            foreach (string i in Comptes.Keys)
-            {
-                savedPasswords += i + " ";
-            }
-            Properties.Settings.Default.Passwords = savedPasswords;
+            Properties.Settings.Default.Comptes += tbUsername.Text;
+            
+            listComptes.Add(new Comptes() {ComptesId=lbComptes.Items.Count,ComptesUser=tbUsername.Text,ComptesPassword=tbPassword.Text});
+            lbComptes.DataSource = listComptes;
+            lbComptes.ValueMember = "ComptesId";
+            lbComptes.DisplayMember = "ComptesUser";
+            MessageBox.Show(lbComptes.Text);
+            MessageBox.Show(listComptes.ToString());
+
         }
 
         private void RemoveAccount_Click(object sender, EventArgs e)
         {
-            Comptes.Remove(lbComptes.GetItemText(lbComptes.SelectedItem));
+            //listComptes.Remove(lbComptes.GetItemText(lbComptes.SelectedItem));
             lbComptes.Items.Remove(lbComptes.SelectedItem);
         }
         #endregion accounts
@@ -206,11 +196,15 @@ namespace SpotifyBot
 
         private void btnPlayQueue_Click(object sender, EventArgs e)
         {
-            foreach (string item in listboxChansons.Items)
+            do
             {
-                PlaySong(item);
-                Thread.Sleep(timeBetweenMusic);
-            }
+                foreach (string item in listboxChansons.Items)
+                {
+                    PlaySong(item);
+                    Thread.Sleep(timeBetweenMusic);
+                }
+            } while (!doStop);
+            doStop = false;
         }
 
         private void btnRemoveFromQueue_Click(object sender, EventArgs e)
@@ -222,14 +216,14 @@ namespace SpotifyBot
 
         private void SpotifyBot_Load(object sender, EventArgs e)
         {
-            string currentUsernames = Properties.Settings.Default.Usernames;
-            string currentPasswords = Properties.Settings.Default.Passwords;
-            Comptes = new Dictionary<string, string>();
+            string currentUsernames = Properties.Settings.Default.Comptes;
+            string currentPasswords = Properties.Settings.Default.Comptes;
+            //Comptes = new Dictionary<string, string>();
             List<string> currentUsernamesList = currentUsernames.Split(' ').ToList();
             List<string> currentPasswordsList = currentPasswords.Split(' ').ToList();
             for (int i = 0; i < currentUsernamesList.Count; i++)
             {
-                Comptes.Add(currentUsernamesList[i], currentPasswordsList[i]);
+                //Comptes.Add(currentUsernamesList[i], currentPasswordsList[i]);
                 lbComptes.Items.Add(currentUsernamesList[i]);
             }
         }
@@ -312,70 +306,6 @@ namespace SpotifyBot
         }
         #endregion installations
         
-        #region MenuLeft
-        
-        private void btnMusic_Enter(object sender, EventArgs e)
-        {
-            PnlNav.Height = btnMusic.Height;
-            PnlNav.Top = btnMusic.Top;
-            PnlNav.Left = btnMusic.Left;
-            btnMusic.BackColor = Color.FromArgb(46,51,73);
-
-        }
-
-        private void btnComptesSpotifyHome_Enter(object sender, EventArgs e)
-        {
-            PnlNav.Height = btnComptesSpotifyHome.Height;
-            PnlNav.Top = btnComptesSpotifyHome.Top;
-            btnComptesSpotifyHome.BackColor = Color.FromArgb(46, 51, 73);
-        }
-
-        private void btnInstanceHome_Enter(object sender, EventArgs e)
-        {
-            PnlNav.Height = btnInstanceHome.Height;
-            PnlNav.Top = btnInstanceHome.Top;
-            btnInstanceHome.BackColor = Color.FromArgb(46, 51, 73);
-        }
-
-        private void BtnOpenVPNHome_Enter(object sender, EventArgs e)
-        {
-            PnlNav.Height = BtnOpenVPNHome.Height;
-            PnlNav.Top = BtnOpenVPNHome.Top;
-            BtnOpenVPNHome.BackColor = Color.FromArgb(46, 51, 73);
-        }
-
-        private void btnSettings_Enter(object sender, EventArgs e)
-        {
-            PnlNav.Height = btnSettings.Height;
-            PnlNav.Top = btnSettings.Top;
-            btnSettings.BackColor = Color.FromArgb(46, 51, 73);
-        }
-
-        private void btnMusic_Leave(object sender, EventArgs e)
-        {
-            btnMusic.BackColor = Color.FromArgb(24, 30, 54);
-        }
-
-        private void btnComptesSpotifyHome_Leave(object sender, EventArgs e)
-        {
-            btnComptesSpotifyHome.BackColor = Color.FromArgb(24, 30, 54);
-        }
-
-        private void btnInstanceHome_Leave(object sender, EventArgs e)
-        {
-            btnInstanceHome.BackColor = Color.FromArgb(24, 30, 54);
-        }
-
-        private void BtnOpenVPNHome_Leave(object sender, EventArgs e)
-        {
-            BtnOpenVPNHome.BackColor = Color.FromArgb(24, 30, 54);
-        }
-
-        private void btnSettings_Leave(object sender, EventArgs e)
-        {
-            btnSettings.BackColor = Color.FromArgb(24, 30, 54);
-        }
-        #endregion MenuLeft
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();

@@ -25,25 +25,13 @@ namespace SpotifyBot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Usernames {
+        [global::System.Configuration.DefaultSettingValueAttribute("Not Set")]
+        public string Comptes {
             get {
-                return ((string)(this["Usernames"]));
+                return ((string)(this["Comptes"]));
             }
             set {
-                this["Usernames"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Passwords {
-            get {
-                return ((string)(this["Passwords"]));
-            }
-            set {
-                this["Passwords"] = value;
+                this["Comptes"] = value;
             }
         }
     }
